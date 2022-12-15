@@ -47,7 +47,8 @@ public class TrybeGamesController
             Console.WriteLine("Opção inválida! Tente novamente.");
             return;
         }
-        try {
+        try
+        {
             var games = database.GetGamesDevelopedBy(gameStudio);
             Console.WriteLine("Jogos do estúdio de jogos " + gameStudio.Name + ":");
             foreach (var game in games)
@@ -70,7 +71,8 @@ public class TrybeGamesController
             Console.WriteLine("Pessoa jogadora não encontrada!");
             return;
         }
-        try {
+        try
+        {
             var games = database.GetGamesPlayedBy(player);
             if (games.Count() == 0)
             {
@@ -99,7 +101,8 @@ public class TrybeGamesController
             Console.WriteLine("Pessoa jogadora não encontrada!");
             return;
         }
-        try {
+        try
+        {
             var games = database.GetGamesOwnedBy(player);
             Console.WriteLine("Jogos comprados pela pessoa jogadora " + player.Name + ":");
             foreach (var game in games)
@@ -116,20 +119,53 @@ public class TrybeGamesController
 
     public void AddPlayer()
     {
-        // implementar
-        Console.WriteLine("Ainda não é possível realizar essa funcionalidade!");
+        Console.Write("Insira o nome do jogador: ");
+        string name = Console.ReadLine();
+
+        Player player = new Player
+        {
+            Id = database.Players.Count + 1,
+            Name = name,
+            GamesOwned = new List<int>(),
+            FavoriteGameStudios = new List<int>()
+        };
+
+        database.Players.Add(player);
     }
 
     public void AddGameStudio()
     {
-        // implementar
-        Console.WriteLine("Ainda não é possível realizar essa funcionalidade!");
+        Console.Write("Insira o nome do estúdio: ");
+        string name = Console.ReadLine();
+
+        GameStudio gs = new GameStudio
+        {
+            Id = database.GameStudios.Count + 1,
+            Name = name
+        };
+
+        database.GameStudios.Add(gs);
     }
 
     public void AddGame()
     {
-        // implementar
-        Console.WriteLine("Ainda não é possível realizar essa funcionalidade!");
+        Console.Write("Insira o nome do jogo: ");
+        string name = Console.ReadLine();
+
+        Console.Write("Insira a data de lançamento: ");
+        string date = Console.ReadLine();
+
+        Console.Write("Insira o tipo do jogo: ");
+        string gameType = Console.ReadLine();
+
+        Game game = new Game
+        {
+            Id = database.GameStudios.Count + 1,
+            Name = name,
+            ReleaseDate = DateTime.Parse(date),
+        };
+
+        database.Games.Add(game);
     }
 
     public void ChangeGameStudio(Game game)

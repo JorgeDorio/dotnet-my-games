@@ -13,13 +13,14 @@ public class TestTrybeGamesDatabase
     [MemberData(nameof(DataTestGetGamesPlayedBy))]
     public void TestGetGamesPlayedBy(TrybeGamesDatabase databaseEntry, int playerIdEntry, List<Game> expected)
     {
-        throw new NotImplementedException();
-
         // Arrange
-        
-        // Act
-        
+        var player = databaseEntry.Players.First(player => player.Id == playerIdEntry);
+
+        // act
+        var games = databaseEntry.GetGamesPlayedBy(player);
+
         // Assert
+        games.Should().BeEquivalentTo(expected);
     }
 
     public static TheoryData<TrybeGamesDatabase, int, List<Game>> DataTestGetGamesPlayedBy => new TheoryData<TrybeGamesDatabase, int, List<Game>>
@@ -73,13 +74,14 @@ public class TestTrybeGamesDatabase
     [MemberData(nameof(DataTestGetGamesOwnedBy))]
     public void TestGetGamesOwnedBy(TrybeGamesDatabase databaseEntry, int playerIdEntry, List<Game> expected)
     {
-        throw new NotImplementedException();
-
         // Arrange
-        
-        // Act
-        
+        var player = databaseEntry.Players.First(player => player.Id == playerIdEntry);
+
+        // act
+        var games = databaseEntry.GetGamesOwnedBy(player);
+
         // Assert
+        games.Should().BeEquivalentTo(expected);
     }
 
     public static TheoryData<TrybeGamesDatabase, int, List<Game>> DataTestGetGamesOwnedBy => new TheoryData<TrybeGamesDatabase, int, List<Game>>
@@ -133,13 +135,14 @@ public class TestTrybeGamesDatabase
     [MemberData(nameof(DataTestGetGamesDevelopedBy))]
     public void TestGetGamesDevelopedBy(TrybeGamesDatabase databaseEntry, int gameStudioIdEntry, List<Game> expected)
     {
-        throw new NotImplementedException();
-
         // Arrange
-        
-        // Act
-        
+        var gs = databaseEntry.GameStudios.First(gameStudio => gameStudio.Id == gameStudioIdEntry);
+
+        // act
+        var games = databaseEntry.GetGamesDevelopedBy(gs);
+
         // Assert
+        games.Should().BeEquivalentTo(expected);
     }
 
     public static TheoryData<TrybeGamesDatabase, int, List<Game>> DataTestGetGamesDevelopedBy => new TheoryData<TrybeGamesDatabase, int, List<Game>>

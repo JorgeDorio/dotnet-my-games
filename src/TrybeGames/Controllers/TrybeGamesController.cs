@@ -156,13 +156,14 @@ public class TrybeGamesController
         string date = Console.ReadLine();
 
         Console.Write("Insira o tipo do jogo: ");
-        string gameType = Console.ReadLine();
+        Int32.TryParse(Console.ReadLine(), out int gameType);
 
         Game game = new Game
         {
             Id = database.GameStudios.Count + 1,
             Name = name,
             ReleaseDate = DateTime.Parse(date),
+            GameType = (GameType)gameType
         };
 
         database.Games.Add(game);
